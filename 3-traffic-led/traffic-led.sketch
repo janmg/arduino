@@ -1,0 +1,39 @@
+const int buttonPin = 2;
+const int GREEN = 11;
+const int RED = 10;
+boolean toggle = false;
+
+void setup() {
+    pinMode(buttonPin, INPUT);
+    pinMode(GREEN, OUTPUT);
+    pinMode(BLUE, OUTPUT);
+    pinMode(RED, OUTPUT);
+}
+
+void loop() {
+    if (digitalRead(buttonPin)) {
+        toggle = !toggle;
+        digitalWrite(LED_BUILTIN, toggle);
+    }
+    if (toggle) {
+        // Cycle Red, Yellow, Green, Yellow
+        analogWrite(GREEN, 0);
+        delay(1000);
+        analogWrite(GREEN, 210);
+        delay(1000);
+        analogWrite(RED, 0);
+        analogWrite(GREEN, 255);
+        delay(1000);
+        analogWrite(RED, 255);
+        analogWrite(GREEN, 210);
+        delay(1000);
+    } else {
+        // Blink Yellow
+        analogWrite(GREEN, 0);
+        analogWrite(RED, 0);
+        delay(1000);
+        analogWrite(GREEN, 210);
+        analogWrite(RED, 255);
+        delay(1000);
+    }
+}

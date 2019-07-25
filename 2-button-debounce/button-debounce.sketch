@@ -1,0 +1,20 @@
+const int buttonPin = 2;
+boolean toggle = true;
+long debounceDelay = 100;
+long lastDebounceTime = 0;
+
+void setup() {
+    pinMode(LED_BUILTIN, OUTPUT);
+    pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+    if (digitalRead(buttonPin)) {
+        if ( (millis() - lastDebounceTime) > debounceDelay) {
+            toggle = !toggle;
+            lastDebounceTime = millis();
+            digitalWrite(LED_BUILTIN, toggle);
+        }
+    }
+}
+
